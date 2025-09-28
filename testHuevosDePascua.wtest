@@ -1,12 +1,36 @@
+import chicos.*
+import cazeria.*
 import huevosDePascua.*
 
 describe "group of tests" {
 
-  test "test 1" {
-    assert.equals(50+50, 100)
+  test "Se inicia el juego de cacería, escondiendo los huevos de pascua en este orden: la matrioshka(con el blister adento con 14 huevitos de chocolate con leche) y de decoración una flor con 7 pétalos, el huevoRepostero, el conejo y el huevoMixto." {
+    blisterHuevitos.cantidadDeHuevos(14)
+    matrioshka.nuevoHuevoInterior(blisterHuevitos)
+    flor.petalos(7)
+    matrioshka.decoracion(flor)
+    cazeria.ocultarHuevos ([matrioshka,huevoRepostero,conejo,huevoMixto])
+
+    assert.equals(matrioshka, cazeria.masCaloricoEs())
   }
   test "test 2" {
-    assert.that(true)
+    blisterHuevitos.cantidadDeHuevos(14)
+    matrioshka.nuevoHuevoInterior(blisterHuevitos)
+    flor.petalos(7)
+    matrioshka.decoracion(flor) 
+    cazeria.ocultarHuevos ([matrioshka,huevoRepostero,conejo,huevoMixto])
+
+    cazeria.encontrarPrimerHuevoEscondido(ana) 
+    assert.that(ana.coleccionHuevos().contains(matrioshka))
+    assert.equals(3, cazeria.porEncontrar().size())
+    assert.equals(2, cazeria.porEncontrar().count({choco => choco.esChocolateBlanco()}))
+    assert.that(cazeria.porEncontrar().contains(conejo))
+    assert.equals([huevoRepostero,huevoMixto], cazeria.sonDeChocolateBlanco())
+    cazeria.ChicoEncontroUnHuevo(tito, huevoMixto)
+    cazeria.chicoEncuentraHuevosRestantes(jose)
+    //assert.that(ana.estaEnfermo())
+    assert.that(jose.estaEnfermo())
+   
   }
 
 }
